@@ -1,0 +1,170 @@
+{
+  "title": "Model Schema",
+  "description": "Standard manifest for saved machine-learning models.",
+  "version": "1.0.0",
+
+  "output": {
+    "title": "Model Manifest",
+    "type": "object",
+    "description": "Structured metadata emitted whenever a model is exported.",
+    "fields": {
+      "export_dtg": {
+        "type": ["string"],
+        "required": true,
+        "format": "date-time",
+        "description": "UTC timestamp (ISO 8601) when the model was saved."
+      },
+
+      "execution_environment": {
+        "type": ["object"],
+        "required": true,
+        "description": "Software and hardware context in which the model was trained.",
+        "fields": {
+          "python_version": {
+            "type": ["string"],
+            "required": true,
+            "description": "Exact Python interpreter version (e.g., \"3.10.12\")."
+          },
+          "library_dependencies": {
+            "type": ["object"],
+            "required": true,
+            "description": "Map of critical libraries → exact versions (e.g., {\"scikit-learn\":\"1.3.0\"})."
+          },
+          "operating_system": {
+            "type": ["string"],
+            "required": true,
+            "description": "OS name and version the training ran on."
+          },
+          "username": {
+            "type": ["string"],
+            "required": true,
+            "description": "User account that executed the training script."
+          },
+          "hardware_specs": {
+            "type": ["object"],
+            "required": true,
+            "description": "Key hardware details (CPU, GPU, RAM).",
+            "fields": {
+              "cpu":  { "type": ["string"],  "required": true  },
+              "gpu":  { "type": ["string"],  "required": false },
+              "ram":  { "type": ["string"],  "required": true }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+
+      "data_description": {
+        "type": ["string"],
+        "required": true,
+        "description": "Free-text overview of the dataset used for training."
+      },
+
+      "data_schema": {
+        "type": ["object"],
+        "required": true,
+        "description": "Map of feature names → expected data types."
+      },
+
+      "feature_names": {
+        "type": ["list"],
+        "subtype": "string",
+        "required": true,
+        "description": "Ordered list of features the model was trained on."
+      },
+
+      "target_variable": {
+        "type": ["string"],
+        "required": true,
+        "description": "Name of the label / target column."
+      },
+
+      "feature_engineering_pipeline": {
+        "type": ["list"],
+        "subtype": "string",
+        "required": true,
+        "description": "Ordered descriptions of preprocessing steps."
+      },
+
+      "hyperparameters": {
+        "type": ["object"],
+        "required": true,
+        "description": "Key-value mapping of model/training hyperparameters."
+      },
+
+      "number_trials":            { "type": ["integer"], "required": true, "description": "Total hyper-parameter search trials." },
+      "dataset_size":             { "type": ["integer"], "required": true,  "description": "Total rows in the full dataset." },
+      "dataset_hash":             { "type": ["string"],  "required": true,  "description": "SHA-256 hash of the *full* dataset." },
+      "train_size":               { "type": ["integer"], "required": true },
+      "validation_size":          { "type": ["integer"], "required": false },
+      "test_size":                { "type": ["integer"], "required": false },
+      "train_hash":               { "type": ["string"],  "required": true  },
+      "validation_hash":          { "type": ["string"],  "required": false },
+      "test_hash":                { "type": ["string"],  "required": false },
+
+      "random_seed":              { "type": ["integer"], "required": true, "description": "Seed used for model training, for reproducibility." },
+
+      "model_type":               { "type": ["string"],  "required": true,  "description": "High-level model family (e.g., \"RandomForest\")." },
+      "model_architecture":       { "type": ["string"],  "required": true, "description": "Detailed architecture / layers (if NN)." },
+      "model_version":            { "type": ["string"],  "required": true,  "description": "Semantic version of the exported model." },
+      "model_description":        { "type": ["string"],  "required": true },
+      "intended_use":             { "type": ["string"],  "required": true },
+      "limitations":              { "type": ["string"],  "required": true },
+
+      "model_file_hash": {
+        "type": ["string"],
+        "required": true,
+        "description": "SHA-256 hash of the serialized model file."
+      },
+
+      "metrics": {
+        "type": ["object"],
+        "required": true,
+        "description": "Performance metrics across splits.",
+        "fields": {
+          "training": {
+            "type": ["object"],
+            "required": true,
+            "fields": {
+              "precision": { "type": ["number"], "required": true },
+              "accuracy":  { "type": ["number"], "required": true },
+              "recall":    { "type": ["number"], "required": true },
+              "f1":        { "type": ["number"], "required": true }
+            },
+            "additionalProperties": false
+          },
+          "validation": {
+            "type": ["object"],
+            "required": false,
+            "fields": {
+              "precision": { "type": ["number"], "required": true },
+              "accuracy":  { "type": ["number"], "required": true },
+              "recall":    { "type": ["number"], "required": true },
+              "f1":        { "type": ["number"], "required": true }
+            },
+            "additionalProperties": false
+          },
+          "test": {
+            "type": ["object"],
+            "required": false,
+            "fields": {
+              "precision": { "type": ["number"], "required": true },
+              "accuracy":  { "type": ["number"], "required": true },
+              "recall":    { "type": ["number"], "required": true },
+              "f1":        { "type": ["number"], "required": true }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+
+      "training_duration_seconds":   { "type": ["number"], "required": true },
+      "validation_duration_seconds": { "type": ["number"], "required": false },
+      "test_duration_seconds":       { "type": ["number"], "required": false }
+    },
+
+    "additionalProperties": false
+  }
+}
