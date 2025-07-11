@@ -75,6 +75,7 @@ for model_type, model in MODELS:
     # ── Build manifest incrementally ───────────────────────────────────────
     mani = ModelManifest(                     # minimal required seed data
         model_type       = model_type,
+        model_architecture = model_type,
         model_version    = "1.0.0",
         model_description= f"{model_type} for iris classification",
         intended_use     = "Demo – flower species prediction",
