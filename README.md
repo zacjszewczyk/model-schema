@@ -1,7 +1,6 @@
 # Model Schema
 
-Model Schema is a lightweight Python package for **saving machine-learning models** and **building fully-featured model manifests** based on a single, versioned JSON contract.  
-The contract captures every detail required to reproduce, audit, and deploy a model—library versions, hardware specs, dataset hashes, hyper-parameters, metrics, and more.
+Model Schema is a lightweight Python package for saving machine-learning models and building model manifests based on a single, versioned JSON contract.  
 
 ## Table of Contents
 
@@ -17,25 +16,24 @@ The contract captures every detail required to reproduce, audit, and deploy a mo
 
 ## Description
 
-Model Schema centralises your model artefact’s metadata in **one authoritative JSON file**. From that contract it automatically:
+Model Schema centralizes your model artifact's metadata in one authoritative JSON file. From that contract it automatically:
 
-- Serialises any picklable model under a predictable filename (`<model_type>_<dtg>.pkl`).  
-- Builds an **incremental** manifest so you can attach metrics, dataset hashes, and hyper-parameters as they become available.  
-- Collects the complete **execution environment** (Python version, installed libraries, OS, hardware specs, user, host).  
+- Serializes any picklable model under a predictable filename (`<model_type>_<dtg>.pkl`).  
+- Builds an incremental manifest so you can attach metrics, dataset hashes, and hyper-parameters as they become available.  
+- Collects the complete execution environment to include Python version, installed libraries, OS, hardware specs, user, and host.  
 - Computes SHA-256 hashes for the full dataset, each split, and the final model file for tamper-evidence and reproducibility.  
 - Performs deep schema validation (type checks, enums, ISO-8601 date-times, oneOf branches, and no extra fields).  
-- Serialises the finished manifest—or a collection of manifests from hyper-parameter sweeps—to pretty-printed JSON ready for CI pipelines, model registries, or downstream consumers.
+- Serializes the finished manifest—or a collection of manifests from hyper-parameter sweeps—to pretty-printed JSON ready for CI pipelines, model registries, or downstream consumers.
 
-With zero dependencies beyond the standard library, Model Schema is ideal for air-gapped training clusters, on-prem MLOps pipelines, or any environment that needs a robust, self-contained provenance layer for models.
+With zero dependencies beyond the standard library, Model Schema is ideal for air-gapped training clusters, on-prem machine learning operations (MLOps) pipelines, or any environment that needs a robust, self-contained provenance layer for models.
 
 ## Dependencies
 
-This project depends **only on the Python standard library (≥3.8)**.  
-If available, `importlib-metadata` (bundled with Python ≥3.10) is used to auto-collect installed package versions; otherwise that feature degrades gracefully.
+This project depends only on the Python standard library (≥3.8).  
 
 ## Installation
 
-```bash
+```
 pip install model-schema
 ```
 
@@ -47,7 +45,7 @@ import model_schema as msc
 
 ## Usage
 
-Check out example_incremental_export.py for a guided walkthrough. That script trains several models, serialises each one, and emits a single JSON file containing every manifest.
+Check out `example.py` for a guided walkthrough. That script trains several models, serializes each one, and emits a single JSON file containing every manifest.
 
 ```
 from model_schema import ModelManifest, validate_manifest
@@ -62,7 +60,7 @@ mani = ModelManifest(
     feature_names=[“age”, “income”, “tenure”, “plan”],
     target_variable=“churned”,
     random_seed=42,
-    # …plus any other required contract fields…
+    # ... plus any other required contract fields
 )
 
 # Add metrics as they become available
@@ -74,7 +72,7 @@ model_path = “RandomForest_2025-07-11T12-00-00Z.pkl”
 with open(model_path, “wb”) as fd:
     pickle.dump(rf_model, fd)
 
-# 3. Finalise → inject environment + model hash → validate
+# 3. Finalize: inject environment + model hash → validate
 mani.finalise(model_path)
 
 # 4. Persist the manifest
@@ -94,7 +92,7 @@ model-schema/            # Project repository
 ├── tests/
 │   └── test_model_schema.py
 │
-├── example_incremental_export.py
+├── example.py
 │
 ├── README.md            # This file
 ├── LICENSE.md           # Project license
@@ -104,42 +102,44 @@ model-schema/            # Project repository
 
 ## Background and Motivation
 
-In ML ops, reproducibility and provenance are paramount. Months after a model is deployed you may need to:
-	•	Re-train on new data with identical hyper-parameters.
-	•	Verify which CUDA driver or library version was used.
-	•	Compare current performance with historic baselines.
+In machine learning, reproducibility and provenance are paramount. Months after a model is deployed you may need to:
 
-Without a rigorous manifest these tasks become guess-work.
-Model Schema solves that by elevating model metadata to a first-class, contract-driven artefact:
-	•	Uniformity – Every model export shares the same field names, types, and defaults.
-	•	Reliability – Fail-fast validation prevents missing or malformed metadata.
-	•	Traceability – Hashes across inputs, splits, and the model file itself enable full audit trails.
-	•	Simplicity – Pure stdlib design keeps dependencies minimal and works in restricted environments.
+* Reproduce that model.
+* Replicate certain aspects of that model generation process with improvements in select areas.
+* Re-train on new data with identical hyper-parameters.
+* Replicate the environment that produced the original model.
+* Compare current performance with historic baselines.
+
+Without detailed documentation, these tasks become guess-work. Model Schema solves that by elevating model metadata to a first-class, contract-driven artefact:
+
+* Every model export shares the same field names, types, and defaults.
+* Validation prevents missing or malformed metadata.
+* Hashes across inputs, splits, and the model file itself enable full audit trails.
+* Pure stdlib design keeps dependencies minimal and works in restricted environments.
 
 By abstracting away boilerplate, you can focus on building better models while ensuring your pipeline remains robust, maintainable, and easy to integrate.
 
 ## Contributing
 
-Contributions are welcome from everyone, regardless of role or experience.
+Contributions are welcome from all, regardless of rank or position.
 
-There are no special system requirements for contributing. To edit via the web:
-	1.	Click the repository’s “Web IDE” button.
-	2.	Make your change (one logical change per commit).
-	3.	Click “Commit…” → provide a descriptive message.
-	4.	Choose “Create a new branch” (recommended name: first.last).
-	5.	Click “Commit”, then open a merge request.
+There are no system requirements for contributing to this project. To contribute via the web:
 
-You can also contribute locally by forking/cloning the repo, creating a branch,
-pushing your changes, and opening a PR.
+1. Click GitLab’s “Web IDE” button to open the online editor.
+2. Make your changes. **Note:** limit your changes to one part of one file per commit; for example, edit only the “Description” section here in the first commit, then the “Background and Motivation” section in a separate commit.
+3. Once finished, click the blue “Commit...” button.
+4. Write a detailed description of the changes you made in the “Commit Message” box.
+5. Select the “Create a new branch” radio button if you do not already have your own branch; otherwise, select your branch. The recommended naming convention for new branches is ``first.middle.last``.
+6. Click the green “Commit” button.
+
+You may also contribute to this project using your local machine by cloning this repository to your workstation, creating a new branch, commiting and pushing your changes, and creating a merge request.
 
 ## Contributors
 
-This section lists project contributors.
-When you submit a merge request, append your name to the list below and (optionally) the sections you contributed.
+This section lists project contributors. When you submit a merge request, remember to append your name to the bottom of the list below. You may also include a brief list of the sections to which you contributed.
 
-* Creator: Zachary Szewczyk
+* **Creator:** Zachary Szewczyk
 
 ## License
 
-This project is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
-See the full text in LICENSE.md. In short, you may remix and share non-commercial derivatives of this work, provided you attribute the original author and license your contributions under the same terms.
+This project is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/). You can view the full text of the license in [LICENSE.md](./LICENSE.md). Read more about the license [at the original author’s website](https://zacs.site/disclaimers.html). Generally speaking, this license allows individuals to remix this work provided they release their adaptation under the same license and cite this project as the original, and prevents anyone from turning this work or its derivatives into a commercial product.
