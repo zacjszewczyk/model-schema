@@ -29,6 +29,16 @@
         "required": true,
         "description": "The software license under which the model is released."
       },
+      "documentation_link": {
+        "type": ["string"],
+        "required": true,
+        "description": "A URL to a research paper, blog post, or other resource for more information."
+      },
+      "contact": {
+        "type": ["string"],
+        "required": true,
+        "description": "An email address or link for questions and comments."
+      },
       "execution_environment": {
         "type": ["object"],
         "required": true,
