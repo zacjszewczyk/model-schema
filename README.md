@@ -47,38 +47,6 @@ import model_schema as msc
 
 Check out `example.py` for a guided walkthrough. That script trains several models, serializes each one, and emits a single JSON file containing every manifest.
 
-```
-from model_schema import ModelManifest, validate_manifest
-
-# 1. Build the manifest incrementally while you train
-mani = ModelManifest(
-    model_type=“RandomForest”,
-    model_version=“1.0.0”,
-    model_description=“Random-Forest classifier for churn prediction”,
-    intended_use=“Marketing churn prevention”,
-    limitations=“May underperform with severe concept drift”,
-    feature_names=[“age”, “income”, “tenure”, “plan”],
-    target_variable=“churned”,
-    random_seed=42,
-    # ... plus any other required contract fields
-)
-
-# Add metrics as they become available
-mani.add_metrics(split=“training”, accuracy=0.95, f1=0.94)
-mani.add_metrics(split=“validation”, accuracy=0.91, f1=0.88)
-
-# 2. Save your trained model (pickle or joblib—your call)
-model_path = “RandomForest_2025-07-11T12-00-00Z.pkl”
-with open(model_path, “wb”) as fd:
-    pickle.dump(rf_model, fd)
-
-# 3. Finalize: inject environment + model hash → validate
-mani.finalise(model_path)
-
-# 4. Persist the manifest
-mani.save_manifest(“rf_manifest.json”)
-```
-
 ## Project structure
 
 ```
