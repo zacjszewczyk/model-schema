@@ -155,6 +155,10 @@ for model_type, model in MODELS:
     # metadata about the model, data, and training process. This serves as
     # the structured documentation for the model artifact.
     mani = msc.ModelManifest(
+        author_organization  = "Cybersecurity",
+        contact              = "zacjszewczyk@gmail.com",
+        documentation_link   = "https://github.com/zacjszewczyk/model-schema",
+        license              = "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License",
         model_type           = model_type,
         model_architecture   = model_type,
         model_version        = "1.0.0",
