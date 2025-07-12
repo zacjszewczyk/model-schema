@@ -76,10 +76,8 @@ except json.JSONDecodeError as exc:
 SCHEMA_VERSION = _SCHEMA_RAW.get("version", "UNKNOWN")
 OUTPUT_SCHEMA: Dict[str, Any] = copy.deepcopy(_SCHEMA_RAW["output"])
 
-
 class SchemaError(ValueError):
     """Raised on any manifest-validation failure."""
-
 
 # A compiled regular expression for validating ISO 8601 datetime strings.
 # Compiling the regex improves performance for repeated validation checks.
@@ -88,7 +86,6 @@ _DT_RE = re.compile(
     r"(?:\.\d{1,6})?"                         # optional .microseconds
     r"(?:Z|[+-]\d{2}:\d{2})$"                 # Z or timezone offset +/-HH:MM
 )
-
 
 def _is_dt(s: Any) -> bool:
     """Check if a string is a valid ISO 8601 datetime.
@@ -124,7 +121,6 @@ _TYPE_DISPATCH: Dict[str, Union[type, Tuple[type, ...]]] = {
     "list":    list,
     "boolean": bool,
 }
-
 
 def _validate(val: Any, schema: Mapping[str, Any], *, path: str = "") -> None:
     """Recursively validate a value against a schema definition.
@@ -217,7 +213,6 @@ def _validate(val: Any, schema: Mapping[str, Any], *, path: str = "") -> None:
             for i, itm in enumerate(val):
                 _validate(itm, item_schema, path=f"{path}[{i}]")
 
-
 def validate_manifest(doc: Mapping[str, Any]) -> None:
     """Validate a document against the global `OUTPUT_SCHEMA`.
 
@@ -266,7 +261,6 @@ def _gather_environment() -> Dict[str, Any]:
         },
     }
 
-
 def _sha256_file(path: pathlib.Path, chunk: int = 1 << 20) -> str:
     """Compute the SHA-256 hash of a file efficiently.
 
@@ -289,7 +283,6 @@ def _sha256_file(path: pathlib.Path, chunk: int = 1 << 20) -> str:
                 break
             h.update(blk)
     return h.hexdigest()
-
 
 class ModelManifest(dict):
     """A dictionary subclass that helps build a valid model manifest.
@@ -387,7 +380,6 @@ class ModelManifest(dict):
             encoding="utf-8"
         )
 
-
 def _main(argv: list[str] | None = None) -> None:  # pragma: no cover
     """Provide a command-line interface for validating manifest files.
 
@@ -424,7 +416,6 @@ def _main(argv: list[str] | None = None) -> None:  # pragma: no cover
     except SchemaError as exc:
         print("Manifest INVALID:\n", exc)
         sys.exit(2)
-
 
 # This block allows the script to be executed directly from the command line.
 if __name__ == "__main__":  # pragma: no cover
