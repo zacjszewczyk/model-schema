@@ -10,7 +10,7 @@ from sklearn.metrics    import precision_recall_fscore_support, accuracy_score
 from sklearn.ensemble   import RandomForestClassifier, GradientBoostingClassifier
 from xgboost            import XGBClassifier                     # optional extra lib
 
-from model_schema import ModelManifest, validate_manifest       # from the package we built
+import model_schema as msc
 
 # ---------------------------------------------------------------------------
 # 1)  Common prep – dataset, splits, helper for metrics → dict
@@ -30,7 +30,7 @@ def _metric_dict(y_true, y_pred):
     }
 
 # Run-level bookkeeping
-run_dtg   = dt.datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
+run_dtg   = dt.datetime.now(dt.UTC).strftime("%Y%m%dT%H%M%SZ")
 run_seed  = 42
 random.seed(run_seed); np.random.seed(run_seed)
 
@@ -73,7 +73,7 @@ for model_type, model in MODELS:
         pickle.dump(model, fd, pickle.HIGHEST_PROTOCOL)
 
     # ── Build manifest incrementally ───────────────────────────────────────
-    mani = ModelManifest(                     # minimal required seed data
+    mani = msc.ModelManifest(                     # minimal required seed data
         model_type       = model_type,
         model_architecture = model_type,
         model_version    = "1.0.0",
@@ -112,13 +112,13 @@ for model_type, model in MODELS:
 # ---------------------------------------------------------------------------
 for idx, m in enumerate(run_manifest["models"]):
     try:
-        validate_manifest(m)
-    except SchemaError as e:
+        msc.validate_manifest(m)
+    except msc.SchemaError as e:
         raise RuntimeError(f"Manifest #{idx} failed validation: {e}")
 
 # ---------------------------------------------------------------------------
 # 4)  Persist the collection as **one** JSON artefact
 # ---------------------------------------------------------------------------
 joined_path = export_dir / f"all_manifests_{run_dtg}.json"
-joined_path.write_text(json.dumps(run_manifest, indent=2, ensure_ascii=False))
+joined_path.write_text(json.dumps(run_manifest, indent=4, ensure_ascii=False), encoding="utf-8")
 print("Complete – exported:", joined_path)
