@@ -24,6 +24,11 @@
         "required": false,
         "description": "A list of individuals who contributed to the model's development."
       },
+      "license": {
+        "type": ["string"],
+        "required": true,
+        "description": "The software license under which the model is released."
+      },
       "execution_environment": {
         "type": ["object"],
         "required": true,
