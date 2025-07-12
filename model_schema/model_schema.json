@@ -1,7 +1,7 @@
 {
   "title": "Model Schema",
   "description": "Standard manifest for saved machine-learning models.",
-  "version": "1.1.0",
+  "version": "1.1.1",
 
   "output": {
     "title": "Model Manifest",
@@ -121,6 +121,7 @@
       "dataset_size":             { "type": ["integer"], "required": true,  "description": "Total rows in the full dataset." },
       "dataset_hash":             { "type": ["string"],  "required": true,  "description": "SHA-256 hash of the *full* dataset." },
       "train_size":               { "type": ["integer"], "required": true },
+      "train_splits":             { "type": ["integer"], "required": false, "description": "Number of cross-validation splits on the training dataset." },
       "validation_size":          { "type": ["integer"], "required": false },
       "test_size":                { "type": ["integer"], "required": false },
       "train_hash":               { "type": ["string"],  "required": true  },
