@@ -1,6 +1,6 @@
 from pathlib import Path
 from time import perf_counter
-import hashlib, json, pickle, random, datetime as dt
+import hashlib, json, pickle, random, datetime as dt, math
 
 import numpy as np
 import pandas as pd
@@ -85,7 +85,10 @@ for model_type, model in MODELS:
         feature_names    = iris.data.columns.tolist(),
         target_variable  = "species",
         feature_engineering_pipeline = ["None – raw numeric features"],
-        hyperparameters  = model.get_params(),
+        hyperparameters  = {
+                                k: (None if isinstance(v, float) and math.isnan(v) else v)
+                                for k, v in model.get_params().items()
+                            },
         number_trials    = 1,
         dataset_size     = len(iris.data),
         dataset_hash     = hashlib.sha256(iris.data.to_json().encode()).hexdigest(),
