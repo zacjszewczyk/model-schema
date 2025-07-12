@@ -1,7 +1,7 @@
 {
   "title": "Model Schema",
   "description": "Standard manifest for saved machine-learning models.",
-  "version": "1.0.0",
+  "version": "1.1.0",
 
   "output": {
     "title": "Model Manifest",
@@ -14,7 +14,11 @@
         "format": "date-time",
         "description": "UTC timestamp (ISO 8601) when the model was saved."
       },
-
+      "author_organization": {
+        "type": ["string"],
+        "required": true,
+        "description": "The name of the organization or institution that developed the model."
+      },
       "execution_environment": {
         "type": ["object"],
         "required": true,
