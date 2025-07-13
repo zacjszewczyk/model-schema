@@ -160,7 +160,7 @@ class ModelManifest(dict):
         done_iso = _now_iso()
         self["finalization_dtg"]      = done_iso
         t1 = _dt.datetime.fromisoformat(done_iso.replace("Z", "+00:00"))
-        self["total_runtime_seconds"] = round((t1 - self._t0).total_seconds(), 3)
+        self["total_runtime_seconds"] = int((t1 - self._t0).total_seconds())
             
         self["model_file_hash"] = _sha256(model_path)
 
