@@ -117,7 +117,8 @@
         "description": "Key-value mapping of model/training hyperparameters."
       },
 
-      "number_trials":            { "type": ["integer"], "required": true, "description": "Total hyper-parameter search trials." },
+      "max_number_trials":            { "type": ["integer"], "required": true, "description": "Maximum number of hyper-parameter search trials allowed." },
+       "actual_number_trials":            { "type": ["integer"], "required": true, "description": "Actual number of hyper-parameter search trials run." },
       "dataset_size":             { "type": ["integer"], "required": true,  "description": "Total rows in the full dataset." },
       "dataset_hash":             { "type": ["string"],  "required": true,  "description": "SHA-256 hash of the *full* dataset." },
       "train_size":               { "type": ["integer"], "required": true, "description": "The number of rows in the final training dataset." },
