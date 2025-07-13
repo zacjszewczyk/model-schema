@@ -128,8 +128,15 @@ class ModelManifest(dict):
             **kwargs: Any other key-value pairs to pre-populate the manifest.
         """
         super().__init__(**kwargs)
-        self["model_type"]  = model_type
-        self["export_dtg"]  = _now_iso()  # The export timestamp is always set at creation time.
+        now_iso = _now_iso()
+
+        # Core identifiers & timing
+        self["model_type"]          = model_type
+        self["export_dtg"]          = now_iso          # (kept for backwards-compat)
+        self["initialization_dtg"]  = now_iso          
+
+        # Private clock for runtime calculation
+        self._t0 = _dt.datetime.fromisoformat(now_iso.replace("Z", "+00:00"))
         self._finalised     = False
 
     def finalise(self, model_path: Path) -> None:
@@ -150,6 +157,12 @@ class ModelManifest(dict):
         # The method is idempotent; it will not run more than once.
         if self._finalised:
             return
+        
+        done_iso = _now_iso()
+        self["finalization_dtg"]      = done_iso
+        t1 = _dt.datetime.fromisoformat(done_iso.replace("Z", "+00:00"))
+        self["total_runtime_seconds"] = round((t1 - self._t0).total_seconds(), 3)
+            
         self["model_file_hash"] = _sha256(model_path)
 
         # The execution environment is auto-populated only if it has not
