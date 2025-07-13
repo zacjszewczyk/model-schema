@@ -178,6 +178,31 @@ class ModelManifest(dict):
         validate_manifest(self)
         self._finalised = True
 
+    def update_field(self, field_name: str, value: Any) -> None:
+        """Create or update a field in the manifest and re-validate.
+
+        This method allows for adding or modifying a field after the initial
+        creation of the manifest. If the manifest has already been finalized,
+        it will be re-validated against the schema after the update to ensure
+        its integrity is maintained.
+
+        Args:
+            field_name (str): The name (key) of the field to create or update.
+            value (Any): The new value for the field.
+
+        Raises:
+            SchemaError: If the update results in a manifest that fails
+                         schema validation.
+        """
+        # Set or update the value for the given field name.
+        self[field_name] = value
+
+        # If the manifest has already been through the finalization process,
+        # it must be re-validated to ensure the change has not made it
+        # non-compliant with the schema.
+        if self._finalised:
+            validate_manifest(self)
+
     def save(self, path: Path | str, *, indent: int = 2) -> None:
         """Save the finalized manifest to a JSON file.
 
