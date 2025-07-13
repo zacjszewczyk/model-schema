@@ -193,7 +193,18 @@
       "validation_duration_seconds": { "type": ["number"], "required": false, "description": "The total time, in seconds, that the model took to perform validation." },
       "test_duration_seconds":       { "type": ["number"], "required": false, "description": "The total time, in seconds, that the model took to run predictions on the test set." }
     },
-
+      "additional_model_properties": {
+        "type": ["object"],
+        "required": false,
+        "description": "Arbitrary, user-supplied key-value metadata that applies ONLY to this model (e.g. data-source tags, business unit, reviewer notes).",
+        "additionalProperties": true
+      },
+      "additional_run_properties": {
+        "type": ["object"],
+        "required": false,
+        "description": "Arbitrary, user-supplied key-value metadata that applies to the entire training *run* (e.g. CI job URL, git commit hash, ticket ID).",
+        "additionalProperties": true
+      } 
     "additionalProperties": false
   }
 }
