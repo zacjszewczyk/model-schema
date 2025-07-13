@@ -101,11 +101,14 @@ run_manifest = {
     "models": []
 }
 
-# Define the output directory for all generated artifacts (models and manifests).
+# Define the output directory for all generated artifacts. A subdirectory
+# named with the run's unique timestamp (`run_dtg`) is created to
+# neatly organize all outputs from this specific execution.
 # `pathlib.Path` is used for robust, cross-platform path handling.
-# `mkdir(exist_ok=True)` ensures the directory is created without raising an
-# error if it already exists.
-export_dir = Path("model_exports"); export_dir.mkdir(exist_ok=True)
+# `mkdir(parents=True, exist_ok=True)` ensures the full path is created
+# without raising an error if it already exists.
+export_dir = Path("model_exports") / run_dtg
+export_dir.mkdir(parents=True, exist_ok=True)
 
 # ---------------------------------------------------------------------------
 # Section 2: Model Training and Manifest Generation Loop
