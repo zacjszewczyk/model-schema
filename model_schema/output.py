@@ -132,11 +132,9 @@ class ModelManifest(dict):
 
         # Core identifiers & timing
         self["model_type"]          = model_type
-        self["initialization_dtg"]  = now_iso          
+        self["initialization_dtg"]  = now_iso
 
-        # Private clock for runtime calculation
-        self._t0 = _dt.datetime.fromisoformat(now_iso.replace("Z", "+00:00"))
-        self._finalised     = False
+        self._finalised             = False
 
     def finalise(self, model_path: Path) -> None:
         """Complete the manifest, inject computed fields, and validate.
@@ -156,12 +154,18 @@ class ModelManifest(dict):
         # The method is idempotent; it will not run more than once.
         if self._finalised:
             return
-        
-        done_iso = _now_iso()
-        self["finalization_dtg"]      = done_iso
-        t1 = _dt.datetime.fromisoformat(done_iso.replace("Z", "+00:00"))
-        self["total_runtime_seconds"] = int((t1 - self._t0).total_seconds())
-            
+
+        self["finalization_dtg"] = _now_iso()
+
+        # Calculate runtime from the manifest's own timestamps.
+        init_dt = _dt.datetime.fromisoformat(
+            self["initialization_dtg"].replace("Z", "+00:00")
+        )
+        final_dt = _dt.datetime.fromisoformat(
+            self["finalization_dtg"].replace("Z", "+00:00")
+        )
+        self["total_runtime_seconds"] = int((final_dt - init_dt).total_seconds())
+
         self["model_file_hash"] = _sha256(model_path)
 
         # The execution environment is auto-populated only if it has not
