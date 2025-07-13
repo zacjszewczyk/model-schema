@@ -204,7 +204,7 @@
         "required": false,
         "description": "Arbitrary, user-supplied key-value metadata that applies to the entire training *run* (e.g. CI job URL, git commit hash, ticket ID).",
         "additionalProperties": true
-      } 
+      },
     "additionalProperties": false
   }
 }
