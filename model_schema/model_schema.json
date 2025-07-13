@@ -28,7 +28,7 @@
 				"description": "UTC timestamp (ISO-8601) when ModelManifest.finalise() completed."
 			},
 			"total_runtime_seconds": {
-				"type": ["int"],
+				"type": ["integer"],
 				"required": true,
 				"description": "Elapsed seconds between initialization_dtg and finalization_dtg."
 			},
