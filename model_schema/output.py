@@ -132,7 +132,6 @@ class ModelManifest(dict):
 
         # Core identifiers & timing
         self["model_type"]          = model_type
-        self["export_dtg"]          = now_iso          # (kept for backwards-compat)
         self["initialization_dtg"]  = now_iso          
 
         # Private clock for runtime calculation
