@@ -1,4 +1,3 @@
-
 """Markdown helpers for contracts & manifests.
 
 This module converts:
