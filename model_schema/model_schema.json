@@ -173,12 +173,12 @@
 				"required": true,
 				"description": "Ordered descriptions of preprocessing steps."
 			},
-			"hyperparameters": {
+			"model_parameters": {
 				"type": [
 					"object"
 				],
 				"required": true,
-				"description": "Key-value mapping of model/training hyperparameters."
+				"description": "Key-value mapping of model parameters."
 			},
 			"max_number_trials": {
 				"type": [
