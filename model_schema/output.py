@@ -155,8 +155,6 @@ class ModelManifest(dict):
         if self._finalised:
             return
 
-        self["finalization_dtg"] = _now_iso()
-
         # Calculate runtime from the manifest's own timestamps.
         init_dt = _dt.datetime.fromisoformat(
             self["initialization_dtg"].replace("Z", "+00:00")
