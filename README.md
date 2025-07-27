@@ -1,6 +1,6 @@
 # Model Schema
 
-Model Schema is a lightweight Python package for saving machine-learning models and building model manifests based on a single, versioned JSON contract.  
+Model Schema is a lightweight Python package that supports machine learning model provenance and reproducibility by helping to construct descriptive model manifests based on a single, versioned JSON contract.  
 
 ## Table of Contents
 
