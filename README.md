@@ -16,20 +16,20 @@ Model Schema is a lightweight Python package that supports machine learning mode
 
 ## Description
 
-Model Schema centralizes your model artifact's metadata in one authoritative JSON file. From that contract it automatically:
+Based on the Model Card concept proposed in 2018 in Mitchell et. al’s [*Model Cards for Model Reporting*](https://arxiv.org/abs/1810.03993) paper, Model Schema centralizes your model artifact's metadata in one authoritative JSON file. From that contract it automatically:
 
-- Serializes any picklable model under a predictable filename (`<model_type>_<dtg>.pkl`).  
 - Builds an incremental manifest so you can attach metrics, dataset hashes, and hyper-parameters as they become available.  
 - Collects the complete execution environment to include Python version, installed libraries, OS, hardware specs, user, and host.  
 - Computes SHA-256 hashes for the full dataset, each split, and the final model file for tamper-evidence and reproducibility.  
 - Performs deep schema validation (type checks, enums, ISO-8601 date-times, oneOf branches, and no extra fields).  
 - Serializes the finished manifest—or a collection of manifests from hyper-parameter sweeps—to pretty-printed JSON ready for CI pipelines, model registries, or downstream consumers.
+- Serializes any picklable model under a predictable filename (`<model_type>_<dtg>.pkl`).  
 
 With zero dependencies beyond the standard library, Model Schema is ideal for air-gapped training clusters, on-prem machine learning operations (MLOps) pipelines, or any environment that needs a robust, self-contained provenance layer for models.
 
 ## Dependencies
 
-This project depends only on the Python standard library (≥3.8).  
+This project depends only on the Python standard library. This project requires Python 3.8 or higher.
 
 ## Installation
 
