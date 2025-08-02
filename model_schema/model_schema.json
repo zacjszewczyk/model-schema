@@ -136,6 +136,19 @@
 				},
 				"additionalProperties": false
 			},
+			"learning_task": {
+				"type": ["string"],
+				"required": true,
+				"enum": [
+					"classification",
+					"regression",
+					"clustering",
+					"dimensionality_reduction",
+					"anomaly_detection",
+					"reinforcement_learning"
+				],
+				"description": "High-level learning paradigm the model implements."
+			},
 			"data_description": {
 				"type": [
 					"string"
