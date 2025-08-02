@@ -344,32 +344,32 @@
 								"type": [
 									"number"
 								],
-								"required": true,
+								"required": false,
 								"description": "The precision score, representing the ratio of correctly predicted positive observations to the total predicted positives."
 							},
 							"accuracy": {
 								"type": [
 									"number"
 								],
-								"required": true,
+								"required": false,
 								"description": "The accuracy score, representing the ratio of correctly predicted observations to the total observations."
 							},
 							"recall": {
 								"type": [
 									"number"
 								],
-								"required": true,
+								"required": false,
 								"description": "The recall score, representing the ratio of correctly predicted positive observations to all observations in the actual class."
 							},
 							"f1": {
 								"type": [
 									"number"
 								],
-								"required": true,
+								"required": false,
 								"description": "The F1 score, which is the harmonic mean of precision and recall."
 							}
 						},
-						"additionalProperties": false
+						"additionalProperties": true
 					},
 					"validation": {
 						"type": [
@@ -382,32 +382,32 @@
 								"type": [
 									"number"
 								],
-								"required": true,
+								"required": false,
 								"description": "The precision score, representing the ratio of correctly predicted positive observations to the total predicted positives."
 							},
 							"accuracy": {
 								"type": [
 									"number"
 								],
-								"required": true,
+								"required": false,
 								"description": "The accuracy score, representing the ratio of correctly predicted observations to the total observations."
 							},
 							"recall": {
 								"type": [
 									"number"
 								],
-								"required": true,
+								"required": false,
 								"description": "The recall score, representing the ratio of correctly predicted positive observations to all observations in the actual class."
 							},
 							"f1": {
 								"type": [
 									"number"
 								],
-								"required": true,
+								"required": false,
 								"description": "The F1 score, which is the harmonic mean of precision and recall."
 							}
 						},
-						"additionalProperties": false
+						"additionalProperties": true
 					},
 					"test": {
 						"type": [
@@ -420,35 +420,35 @@
 								"type": [
 									"number"
 								],
-								"required": true,
+								"required": false,
 								"description": "The precision score, representing the ratio of correctly predicted positive observations to the total predicted positives."
 							},
 							"accuracy": {
 								"type": [
 									"number"
 								],
-								"required": true,
+								"required": false,
 								"description": "The accuracy score, representing the ratio of correctly predicted observations to the total observations."
 							},
 							"recall": {
 								"type": [
 									"number"
 								],
-								"required": true,
+								"required": false,
 								"description": "The recall score, representing the ratio of correctly predicted positive observations to all observations in the actual class."
 							},
 							"f1": {
 								"type": [
 									"number"
 								],
-								"required": true,
+								"required": false,
 								"description": "The F1 score, which is the harmonic mean of precision and recall."
 							}
 						},
-						"additionalProperties": false
+						"additionalProperties": true
 					}
 				},
-				"additionalProperties": false
+				"additionalProperties": true
 			},
 			"training_duration_seconds": {
 				"type": [
