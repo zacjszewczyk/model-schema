@@ -476,7 +476,7 @@
 					"object"
 				],
 				"required": false,
-				"description": "Arbitrary, user-supplied key-value metadata that applies ONLY to this model (e.g. data-source tags, business unit, reviewer notes).",
+				"description": "Arbitrary, user-supplied key-value metadata that applies ONLY to this model (e.g. data-source tags, business unit, reviewer notes, number of clusters, explained variance, noise, etc).",
 				"additionalProperties": true
 			},
 			"additional_run_properties": {
