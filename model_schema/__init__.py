@@ -8,6 +8,9 @@ This module acts as the single entry-point for all public functionality. Sub-mod
     >>> msc.validate_manifest(mani)
 """
 
+import warnings
+warnings.warn("model-schema is deprecated; use contract-schema instead", DeprecationWarning)
+
 # Import key components from submodules to create the public package API.
 from .loader    import OUTPUT_SCHEMA, SCHEMA_VERSION, SCHEMA_PATH
 from .validator import validate_manifest, SchemaError
