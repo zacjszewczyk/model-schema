@@ -328,127 +328,14 @@
 			},
 			"metrics": {
 				"type": [
-					"object"
-				],
+				    "object"
+                ],
 				"required": true,
-				"description": "Performance metrics across splits.",
-				"fields": {
-					"training": {
-						"type": [
-							"object"
-						],
-						"required": true,
-						"description": "Performance metrics calculated on the entire training dataset.",
-						"fields": {
-							"precision": {
-								"type": [
-									"number"
-								],
-								"required": false,
-								"description": "The precision score, representing the ratio of correctly predicted positive observations to the total predicted positives."
-							},
-							"accuracy": {
-								"type": [
-									"number"
-								],
-								"required": false,
-								"description": "The accuracy score, representing the ratio of correctly predicted observations to the total observations."
-							},
-							"recall": {
-								"type": [
-									"number"
-								],
-								"required": false,
-								"description": "The recall score, representing the ratio of correctly predicted positive observations to all observations in the actual class."
-							},
-							"f1": {
-								"type": [
-									"number"
-								],
-								"required": false,
-								"description": "The F1 score, which is the harmonic mean of precision and recall."
-							}
-						},
-						"additionalProperties": true
-					},
-					"validation": {
-						"type": [
-							"object"
-						],
-						"required": false,
-						"description": "Performance metrics calculated on the validation dataset. For k-fold cross-validation, these should be the average scores across all folds.",
-						"fields": {
-							"precision": {
-								"type": [
-									"number"
-								],
-								"required": false,
-								"description": "The precision score, representing the ratio of correctly predicted positive observations to the total predicted positives."
-							},
-							"accuracy": {
-								"type": [
-									"number"
-								],
-								"required": false,
-								"description": "The accuracy score, representing the ratio of correctly predicted observations to the total observations."
-							},
-							"recall": {
-								"type": [
-									"number"
-								],
-								"required": false,
-								"description": "The recall score, representing the ratio of correctly predicted positive observations to all observations in the actual class."
-							},
-							"f1": {
-								"type": [
-									"number"
-								],
-								"required": false,
-								"description": "The F1 score, which is the harmonic mean of precision and recall."
-							}
-						},
-						"additionalProperties": true
-					},
-					"test": {
-						"type": [
-							"object"
-						],
-						"required": false,
-						"description": "Performance metrics calculated on the hold-out test dataset.",
-						"fields": {
-							"precision": {
-								"type": [
-									"number"
-								],
-								"required": false,
-								"description": "The precision score, representing the ratio of correctly predicted positive observations to the total predicted positives."
-							},
-							"accuracy": {
-								"type": [
-									"number"
-								],
-								"required": false,
-								"description": "The accuracy score, representing the ratio of correctly predicted observations to the total observations."
-							},
-							"recall": {
-								"type": [
-									"number"
-								],
-								"required": false,
-								"description": "The recall score, representing the ratio of correctly predicted positive observations to all observations in the actual class."
-							},
-							"f1": {
-								"type": [
-									"number"
-								],
-								"required": false,
-								"description": "The F1 score, which is the harmonic mean of precision and recall."
-							}
-						},
-						"additionalProperties": true
-					}
-				},
-				"additionalProperties": true
+				"description": "Key-value map of metric name → value(s) relevant to the learning task.",
+				"additionalProperties": {
+					"type": ["number", "object", "list"]
+				}
+
 			},
 			"training_duration_seconds": {
 				"type": [
