@@ -175,8 +175,8 @@
 				"type": [
 					"string"
 				],
-				"required": true,
-				"description": "Name of the label / target column."
+				"required": false,
+				"description": "Name of the label / target column, if applicable."
 			},
 			"feature_engineering_pipeline": {
 				"type": [
