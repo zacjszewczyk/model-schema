@@ -133,6 +133,7 @@ class ModelManifest(dict):
         # Core identifiers & timing
         self["model_type"]          = model_type
         self["initialization_dtg"]  = now_iso
+        self["learning_task"]       = learning_task
 
         self._finalised             = False
 
