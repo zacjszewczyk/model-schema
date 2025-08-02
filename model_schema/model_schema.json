@@ -1,7 +1,7 @@
 {
 	"title": "Model Schema",
 	"description": "Standard manifest for saved machine-learning models.",
-	"version": "1.1.2",
+	"version": "1.1.3",
 	"output": {
 		"title": "Model Manifest",
 		"type": "object",
@@ -197,14 +197,14 @@
 				"type": [
 					"integer"
 				],
-				"required": true,
+				"required": false,
 				"description": "Maximum number of hyper-parameter search trials allowed."
 			},
 			"actual_number_trials": {
 				"type": [
 					"integer"
 				],
-				"required": true,
+				"required": false,
 				"description": "Actual number of hyper-parameter search trials run."
 			},
 			"dataset_size": {
