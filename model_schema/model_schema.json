@@ -332,9 +332,7 @@
                 ],
 				"required": true,
 				"description": "Key-value map of metric name → value(s) relevant to the learning task.",
-				"additionalProperties": {
-					"type": ["number", "object", "list"]
-				}
+				"additionalProperties": true
 
 			},
 			"training_duration_seconds": {
