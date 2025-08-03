@@ -1,5 +1,7 @@
 # Model Schema
 
+**Note:** This project has been discontinued. Please use [Contract schema](https://github.com/zacjszewczyk/contract-schema/).
+
 Model Schema is a lightweight Python package that supports machine learning model provenance and reproducibility by helping to construct descriptive model manifests based on a single, versioned JSON contract.  
 
 ## Table of Contents
